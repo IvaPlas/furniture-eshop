@@ -4,7 +4,7 @@ import { ProductDetail } from '../ProductDetail/ProductDetail';
 
 export const ProductPage = () => {
   const { productId } = useParams();
-  const [product, setProduct] = useState();
+  const [product, setProduct] = useState('loading');
 
   useEffect(() => {
     fetch(`https://apps.kodim.cz/react-2/xxxmuck/products/${productId}`)
@@ -13,10 +13,12 @@ export const ProductPage = () => {
   }, []);
 
   return (
-    <>
-      <div className="product-detail">
+    <div className="product-detail">
+      {product === 'loading' ? (
+        <p>loading...</p>
+      ) : (
         <ProductDetail product={product} />
-      </div>
-    </>
+      )}
+    </div>
   );
 };
